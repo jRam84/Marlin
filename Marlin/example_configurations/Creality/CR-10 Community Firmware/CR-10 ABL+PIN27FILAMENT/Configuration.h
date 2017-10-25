@@ -81,9 +81,14 @@
  *    (0,0)
  *    
  */
-#define X_PROBE_OFFSET_FROM_EXTRUDER -46  // X offset: -left  +right  [of the nozzle]
-#define Y_PROBE_OFFSET_FROM_EXTRUDER -5  // Y offset: -front +behind [of nozzle]
-#define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
+//#define X_PROBE_OFFSET_FROM_EXTRUDER -46  // X offset: -left  +right  [of the nozzle]
+//#define Y_PROBE_OFFSET_FROM_EXTRUDER -5  // Y offset: -front +behind [of nozzle]
+//#define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
+
+#define SENSOR_LEFT        46
+#define SENSOR_RIGHT       0
+#define SENSOR_FRONT       5
+#define SENSOR_BEHIND      0
 
 /*
  * 
@@ -877,6 +882,11 @@
 //#define Y_PROBE_OFFSET_FROM_EXTRUDER -5  // Y offset: -front +behind [the nozzle]
 //#define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
 
+#define X_PROBE_OFFSET_FROM_EXTRUDER SENSOR_RIGHT - SENSOR_LEFT  // X offset: -left  +right  [of the nozzle]
+#define Y_PROBE_OFFSET_FROM_EXTRUDER SENSOR_BEHIND - SENSOR_FRONT // Y offset: -front +behind [the nozzle]
+#define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
+
+
 // X and Y axis travel speed (mm/m) between probes
 #define XY_PROBE_SPEED 10000
 
@@ -997,7 +1007,7 @@
  * For other boards you may need to define FIL_RUNOUT_PIN.
  * By default the firmware assumes HIGH = has filament, LOW = ran out
  */
-//#define FILAMENT_RUNOUT_SENSOR
+//#define FILAMENT_RUNOUT_SENSOR // moved to top
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   #define FIL_RUNOUT_INVERTING true // set to true to invert the logic of the sensor.
   #define ENDSTOPPULLUP_FIL_RUNOUT // Uncomment to use internal pullup for filament runout pins if the sensor is defined.
@@ -1065,6 +1075,16 @@
  */
 //#define DEBUG_LEVELING_FEATURE
 
+#define PROBE_Y_FRONT BED_MARGIN + SENSOR_BEHIND
+
+#define PROBE_Y_BACK Y_BED_SIZE - BED_MARGIN - SENSOR_FRONT
+
+#define PROBE_X_LEFT BED_MARGIN + SENSOR_RIGHT
+
+#define PROBE_X_RIGHT X_BED_SIZE - BED_MARGIN - SENSOR_LEFT
+
+#define PROBE_X_MIDDLE (X_BED_SIZE / 2)
+
 #if ENABLED(MESH_BED_LEVELING) || ENABLED(AUTO_BED_LEVELING_BILINEAR) || ENABLED(AUTO_BED_LEVELING_UBL)
   // Gradually reduce leveling correction until a set height is reached,
   // at which point movement will be level to the machine's XY plane.
@@ -1079,10 +1099,10 @@
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   // Set the boundaries for probing (where the probe can reach).
-  #define LEFT_PROBE_BED_POSITION 50
-  #define RIGHT_PROBE_BED_POSITION 250
-  #define FRONT_PROBE_BED_POSITION 50
-  #define BACK_PROBE_BED_POSITION 250
+  #define LEFT_PROBE_BED_POSITION PROBE_X_LEFT
+  #define RIGHT_PROBE_BED_POSITION PROBE_X_RIGHT
+  #define FRONT_PROBE_BED_POSITION PROBE_Y_FRONT
+  #define BACK_PROBE_BED_POSITION PROBE_Y_BACK
 
   // The Z probe minimum outer margin (to validate G29 parameters).
   #define MIN_PROBE_EDGE BED_MARGIN
@@ -1112,12 +1132,12 @@
 
   // 3 arbitrary points to probe.
   // A simple cross-product is used to estimate the plane of the bed.
-  #define ABL_PROBE_PT_1_X 15
-  #define ABL_PROBE_PT_1_Y 180
-  #define ABL_PROBE_PT_2_X 15
-  #define ABL_PROBE_PT_2_Y 20
-  #define ABL_PROBE_PT_3_X 170
-  #define ABL_PROBE_PT_3_Y 20
+  #define ABL_PROBE_PT_1_X PROBE_X_LEFT
+  #define ABL_PROBE_PT_1_Y PROBE_Y_FRONT
+  #define ABL_PROBE_PT_2_X PROBE_X_RIGHT
+  #define ABL_PROBE_PT_2_Y PROBE_Y_FRONT
+  #define ABL_PROBE_PT_3_X PROBE_X_MIDDLE
+  #define ABL_PROBE_PT_3_Y PROBE_Y_BACK
 
 #elif ENABLED(AUTO_BED_LEVELING_UBL)
 
@@ -1125,16 +1145,16 @@
   //========================= Unified Bed Leveling ============================
   //===========================================================================
 
-  #define UBL_MESH_INSET 1          // Mesh inset margin on print area
-  #define GRID_MAX_POINTS_X 10      // Don't use more than 15 points per axis, implementation limited.
+  #define UBL_MESH_INSET BED_MARGIN          // Mesh inset margin on print area
+  #define GRID_MAX_POINTS_X GRID_POINTS      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
-  #define UBL_PROBE_PT_1_X 39       // Probing points for 3-Point leveling of the mesh
-  #define UBL_PROBE_PT_1_Y 180
-  #define UBL_PROBE_PT_2_X 39
-  #define UBL_PROBE_PT_2_Y 20
-  #define UBL_PROBE_PT_3_X 180
-  #define UBL_PROBE_PT_3_Y 20
+  #define UBL_PROBE_PT_1_X PROBE_X_LEFT // Probing points for 3-Point leveling of the mesh
+  #define UBL_PROBE_PT_1_Y PROBE_Y_FRONT
+  #define UBL_PROBE_PT_2_X PROBE_X_RIGHT
+  #define UBL_PROBE_PT_2_Y PROBE_Y_FRONT
+  #define UBL_PROBE_PT_3_X PROBE_X_MIDDLE
+  #define UBL_PROBE_PT_3_Y PROBE_Y_BACK
 
   //#define UBL_G26_MESH_VALIDATION // Enable G26 mesh validation
   #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle
@@ -1145,8 +1165,8 @@
   //=================================== Mesh ==================================
   //===========================================================================
 
-  #define MESH_INSET 10          // Mesh inset margin on print area
-  #define GRID_MAX_POINTS_X 4    // Don't use more than 7 points per axis, implementation limited.
+  #define MESH_INSET BED_MARGIN          // Mesh inset margin on print area
+  #define GRID_MAX_POINTS_X X GRID_POINTS    // Don't use more than 7 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   //#define MESH_G28_REST_ORIGIN // After homing all axes ('G28' or 'G28 XYZ') rest Z at Z_MIN_POS
