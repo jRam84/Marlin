@@ -21,9 +21,9 @@
  *  DO NOT HOME UNTIL YOU ARE SURE THE AXIS ARE MOVING TO THE CORRECT DIRECTION
  *  
  */
-#define CHANGE_Y_DIRECTION    // If your bed homes in the wrong direction enable this (Bed should move to the back to Home)
-#define CHANGE_X_DIRECTION    // If your X carriage homes in the wrong direction left to right, enable this (Carriage should move to the Left to Home)
-//#define CHANGE_Z_DIRECTION    // If your Z homes in the wrong direction bottom to top, enable this (Gantry should move down to Home)
+//#define CHANGE_Y_DIRECTION    // If your bed homes in the wrong direction enable this (Bed should move to the back to Home)
+//#define CHANGE_X_DIRECTION    // If your X carriage homes in the wrong direction left to right, enable this (Carriage should move to the Left to Home)
+#define CHANGE_Z_DIRECTION    // If your Z homes in the wrong direction bottom to top, enable this (Gantry should move down to Home)
 /**
  *  ---------------------------------------------
  *  ---------EXTRUDER STEPS AND DIRECTION--------
@@ -32,7 +32,7 @@
  * (How to calibrate: https://toms3d.org/2014/04/06/3d-printing-guides-calibrating-your-extruder/)
  */
 #define E0_STEPS      93 // Stock value, still needs to be calibrated for your extruder stepper
-#define CHANGE_E0_DIRECTION   // If your extruder is going backwards, enable this
+//#define CHANGE_E0_DIRECTION   // If your extruder is going backwards, enable this
 
 /**
  *  -------------------------------------------
@@ -82,10 +82,10 @@
  *    
  */
 
-#define SENSOR_LEFT        50  // If your X offset is Negative type it here without the minus (-) Example if -46 then type 46 
-#define SENSOR_RIGHT       0   // If your X offset is Positive type it here
-#define SENSOR_FRONT       10   // If your Y offset is Negative type it here without the minus (-) Example if -6 then type 6
-#define SENSOR_BEHIND      0   // If your Y offset is Positive type it here
+#define SENSOR_LEFT        46
+#define SENSOR_RIGHT       0
+#define SENSOR_FRONT       10
+#define SENSOR_BEHIND      0
 
 /*
  * 
@@ -150,7 +150,7 @@
  * The pin number for the Beeper is 27
 */
 
-//#define FILAMENT_RUNOUT_SENSOR     // BLTOUCH and Filament Sensor will not work together in the stock CR-10 board, If one is chosen the other needs to be disabled
+#define FILAMENT_RUNOUT_SENSOR     // If you need to reverse the logic of the sensor go to Line 1005
 
 
 /************************ END OF EASY CONFIG ***************************
@@ -273,7 +273,7 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 115200
+#define BAUDRATE 250000
 
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
@@ -281,12 +281,12 @@
 // The following define selects which electronics board you have.
 // Please choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_MELZI_CREALITY
+  #define MOTHERBOARD BOARD_RAMPS_14_EFB
 #endif
 
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
-#define CUSTOM_MACHINE_NAME "CR-10 BLTouch Community Firmware"
+#define CUSTOM_MACHINE_NAME "CR-10S BLTouch Community Firmware"
 
 // Define this to set a unique identifier for this printer, (Used by some programs to differentiate between machines)
 // You can use an online service to generate a random UUID. (eg http://www.uuidgenerator.net/version4)
@@ -376,22 +376,6 @@
 
 // @section machine
 
-// Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way. *This was moved to top of page, do not edit*
-#if ENABLED(CHANGE_X_DIRECTION)
-  #define INVERT_X_DIR true
-#else
-  #define INVERT_X_DIR false
-#endif
-#if ENABLED(CHANGE_Y_DIRECTION)
-  #define INVERT_Y_DIR true
-#else
-  #define INVERT_Y_DIR false
-#endif
-#if ENABLED(CHANGE_Z_DIRECTION)
-  #define INVERT_Z_DIR true
-#else
-  #define INVERT_Z_DIR false
-#endif
 
 /**
  * Select your power supply here. Use 0 if you haven't connected the PS_ON_PIN
@@ -518,7 +502,7 @@
 #define BANG_MAX 255 // limits current to nozzle while in bang-bang mode; 255=full current
 #define PID_MAX BANG_MAX // limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #if ENABLED(PIDTEMP)
-  //#define PID_AUTOTUNE_MENU // Add PID Autotune to the LCD "Temperature" menu to run M303 and apply the result.
+  #define PID_AUTOTUNE_MENU // Add PID Autotune to the LCD "Temperature" menu to run M303 and apply the result.
   //#define PID_DEBUG // Sends debug data to the serial port.
   //#define PID_OPENLOOP 1 // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
   //#define SLOW_PWM_HEATERS // PWM with very low frequency (roughly 0.125Hz=8s) and minimum state time of approximately 1s useful for heaters driven by a relay
@@ -676,7 +660,7 @@
   //#define ENDSTOPPULLUP_ZMIN_PROBE
 #endif
 
-// Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
+// Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup). This settings were moved to top
 //#define X_MIN_ENDSTOP_INVERTING false // set to true to invert the logic of the endstop.
 //#define Y_MIN_ENDSTOP_INVERTING false // set to true to invert the logic of the endstop.
 //#define Z_MIN_ENDSTOP_INVERTING false // set to true to invert the logic of the endstop.
@@ -875,9 +859,6 @@
  *      O-- FRONT --+
  *    (0,0)
  */
-//#define X_PROBE_OFFSET_FROM_EXTRUDER -46  // X offset: -left  +right  [of the nozzle]
-//#define Y_PROBE_OFFSET_FROM_EXTRUDER -5  // Y offset: -front +behind [the nozzle]
-//#define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
 
 #define X_PROBE_OFFSET_FROM_EXTRUDER SENSOR_RIGHT - SENSOR_LEFT  // X offset: -left  +right  [of the nozzle]
 #define Y_PROBE_OFFSET_FROM_EXTRUDER SENSOR_BEHIND - SENSOR_FRONT // Y offset: -front +behind [the nozzle]
@@ -942,10 +923,22 @@
 
 // @section machine
 
-// Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-//#define INVERT_X_DIR true  **moved to top
-//#define INVERT_Y_DIR true **moved to top
-//#define INVERT_Z_DIR false **moved to top
+// Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way. *This was moved to top of page, do not edit*
+#if ENABLED(CHANGE_X_DIRECTION)
+  #define INVERT_X_DIR true
+#else
+  #define INVERT_X_DIR false
+#endif
+#if ENABLED(CHANGE_Y_DIRECTION)
+  #define INVERT_Y_DIR true
+#else
+  #define INVERT_Y_DIR false
+#endif
+#if ENABLED(CHANGE_Z_DIRECTION)
+  #define INVERT_Z_DIR true
+#else
+  #define INVERT_Z_DIR false
+#endif
 
 // Enable this option for Toshiba stepper drivers
 //#define CONFIG_STEPPERS_TOSHIBA
@@ -1182,7 +1175,7 @@
 #endif
 
 // Add a menu item to move between bed corners for manual bed adjustment
-//#define LEVEL_BED_CORNERS
+#define LEVEL_BED_CORNERS
 
 /**
  * Commands to execute at the end of G29 probing.
@@ -1247,8 +1240,8 @@
 // every couple of seconds when it can't accept commands.
 //
 //#define HOST_KEEPALIVE_FEATURE        // Disable this if your host doesn't like keepalive messages
-//#define DEFAULT_KEEPALIVE_INTERVAL 2  // Number of seconds between "busy" messages. Set with M113.
-//#define BUSY_WHILE_HEATING            // Some hosts require "busy" messages even during heating
+#define DEFAULT_KEEPALIVE_INTERVAL 2  // Number of seconds between "busy" messages. Set with M113.
+#define BUSY_WHILE_HEATING            // Some hosts require "busy" messages even during heating
 
 //
 // M100 Free Memory Watcher
@@ -1385,7 +1378,7 @@
  *
  * View the current statistics with M78.
  */
-//#define PRINTCOUNTER
+#define PRINTCOUNTER
 
 //=============================================================================
 //============================= LCD and SD support ============================
@@ -1475,7 +1468,7 @@
 // This option overrides the default number of encoder pulses needed to
 // produce one step. Should be increased for high-resolution encoders.
 //
-#define ENCODER_PULSES_PER_STEP 4
+#define ENCODER_PULSES_PER_STEP 3
 
 //
 // Use this option to override the number of step signals required to
@@ -1513,7 +1506,7 @@
 //
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
-//#define INDIVIDUAL_AXIS_HOMING_MENU
+#define INDIVIDUAL_AXIS_HOMING_MENU
 
 //
 // SPEAKER/BUZZER
@@ -1521,7 +1514,7 @@
 // If you have a speaker that can produce tones, enable it here.
 // By default Marlin assumes you have a buzzer with a fixed frequency.
 //
-//#define SPEAKER
+#define SPEAKER
 
 //
 // The duration and frequency for the UI feedback sound.
@@ -1875,7 +1868,7 @@
 // Delay (in milliseconds) before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
 // If the servo can't reach the requested position, increase it.
-#define SERVO_DELAY { 300 }
+//#define SERVO_DELAY { 300 }
 
 // Servo deactivation
 //

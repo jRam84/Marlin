@@ -81,14 +81,10 @@
  *    (0,0)
  *    
  */
-//#define X_PROBE_OFFSET_FROM_EXTRUDER -46  // X offset: -left  +right  [of the nozzle]
-//#define Y_PROBE_OFFSET_FROM_EXTRUDER -5  // Y offset: -front +behind [of nozzle]
-//#define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
-
-#define SENSOR_LEFT        46
-#define SENSOR_RIGHT       0
-#define SENSOR_FRONT       5
-#define SENSOR_BEHIND      0
+#define SENSOR_LEFT        46  // If your X offset is Negative type it here without the minus (-) Example if -46 then type 46 
+#define SENSOR_RIGHT       0   // If your X offset is Positive type it here
+#define SENSOR_FRONT       6   // If your Y offset is Negative type it here without the minus (-) Example if -6 then type 6
+#define SENSOR_BEHIND      0   // If your Y offset is Positive type it here
 
 /*
  * 
