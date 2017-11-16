@@ -48,7 +48,7 @@
 #define X_MIN_ENDSTOP_INVERTING false // set to true to invert the logic of the endstop
 #define Y_MIN_ENDSTOP_INVERTING false // set to true to invert the logic of the endstop.
 #define Z_MIN_ENDSTOP_INVERTING false // set to true to invert the logic of the endstop
-#define Z_MIN_PROBE_ENDSTOP_INVERTING true // set to true to invert the logic of the probe
+#define Z_MIN_PROBE_ENDSTOP_INVERTING false // set to true to invert the logic of the probe
 
 /**
  *  -----------------------------------------
@@ -94,11 +94,11 @@
 /**
  * Bed leveling type 
  */
-//#define TRIPOINT // not fully configured yet as this is not very useful on large beds
-//#define LINEAR // not fully configured yet as this is not very useful on large beds
+//#define TRIPOINT // This is not very useful on large beds
+//#define LINEAR // This is not very useful on large beds
 #define BILINEAR // Most common type of bed leveling
-//#define UBL // Use when you know your bed is mostly flat, this uses a lot of progmem. Stock CR-10 won't be able to use this if Filament sensor is enabled
-//#define MANUAL
+//#define UBL // Use when you know your bed is mostly flat, this uses a lot of progmem
+//#define MANUAL // Not fully tested yet
 /**
  * Number of grid points to Probe in each direction
  * Minimum 3. Maximum 15 for UBL. Maximum 7 for MANUAL
@@ -150,7 +150,7 @@
  * The pin number for the Beeper is 27
 */
 
-#define FILAMENT_RUNOUT_SENSOR     // If you need to reverse the logic of the sensor go to Line 1005
+//#define FILAMENT_RUNOUT_SENSOR     // If you need to reverse the logic of the sensor go to Line 1005
 
 
 /************************ END OF EASY CONFIG ***************************
@@ -647,7 +647,7 @@
 //#define USE_ZMAX_PLUG
 
 // coarse Endstop Settings
-#define ENDSTOPPULLUPS // Comment this out (using // at the start of the line) to disable the endstop pullup resistors
+//#define ENDSTOPPULLUPS // Comment this out (using // at the start of the line) to disable the endstop pullup resistors
 
 #if DISABLED(ENDSTOPPULLUPS)
   // fine endstop settings: Individual pullups. will be ignored if ENDSTOPPULLUPS is defined
@@ -899,7 +899,7 @@
 #define Z_PROBE_OFFSET_RANGE_MAX 20
 
 // Enable the M48 repeatability test to test probe accuracy
-//#define Z_MIN_PROBE_REPEATABILITY_TEST
+#define Z_MIN_PROBE_REPEATABILITY_TEST
 
 // For Inverting Stepper Enable Pins (Active Low) use 0, Non Inverting (Active High) use 1
 // :{ 0:'Low', 1:'High' }
@@ -973,8 +973,8 @@
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 500
-#define Y_BED_SIZE 500
+#define X_BED_SIZE 400
+#define Y_BED_SIZE 400
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -982,7 +982,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 500
+#define Z_MAX_POS 400
 
 // If enabled, axes won't move below MIN_POS in response to movement commands.
 //#define MIN_SOFTWARE_ENDSTOPS

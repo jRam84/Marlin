@@ -58,8 +58,8 @@
  * Type of Probe installed on your machine
  */
  
-#define APPROACH_SENSOR  // Cylindrical NPN NO sensor type, used in the CR-10 ABL kits
-//#define BLTOUCH
+//#define APPROACH_SENSOR  // Cylindrical NPN NO sensor type, used in the CR-10 ABL kits
+#define BLTOUCH
 
 /**
  *   Z Probe to nozzle (X,Y) offset, relative to (0, 0).
@@ -82,10 +82,10 @@
  *    
  */
 
-#define SENSOR_LEFT        46  // If your X offset is Negative type it here without the minus (-) Example if -46 then type 46 
-#define SENSOR_RIGHT       0   // If your X offset is Positive type it here
-#define SENSOR_FRONT       6   // If your Y offset is Negative type it here without the minus (-) Example if -6 then type 6
-#define SENSOR_BEHIND      0   // If your Y offset is Positive type it here
+#define SENSOR_LEFT        46
+#define SENSOR_RIGHT       0
+#define SENSOR_FRONT       10
+#define SENSOR_BEHIND      0
 
 /*
  * 
@@ -94,11 +94,11 @@
 /**
  * Bed leveling type 
  */
-//#define TRIPOINT // This is not very useful on large beds
-//#define LINEAR // This is not very useful on large beds
+//#define TRIPOINT // not fully configured yet as this is not very useful on large beds
+//#define LINEAR // not fully configured yet as this is not very useful on large beds
 #define BILINEAR // Most common type of bed leveling
-//#define UBL // Use when you know your bed is mostly flat, this uses a lot of progmem
-//#define MANUAL // Not fully tested yet
+//#define UBL // Use when you know your bed is mostly flat, this uses a lot of progmem. Stock CR-10 won't be able to use this if Filament sensor is enabled
+//#define MANUAL
 /**
  * Number of grid points to Probe in each direction
  * Minimum 3. Maximum 15 for UBL. Maximum 7 for MANUAL
@@ -120,7 +120,7 @@
 #define  hot_Kp 17.29
 #define  hot_Ki 1.01
 #define  hot_Kd 73.64
-// THIS ARE MY SETTINGS PLEASE FIND YOUR OWN: "M303 E0 C8 S200" to run autotune on the hotend at 200 degreesC for 8 cycles
+// FIND YOUR OWN: "M303 E0 C8 S200" to run autotune on the hotend at 200 degreesC for 8 cycles
 // More info here: http://reprap.org/wiki/PID_Tuning
 /**
  * CR-10 Custom PID Settings - Stock Heatbed
@@ -129,7 +129,7 @@
 #define  bed_Ki 113.80
 #define  bed_Kd 757.81
 
-// THIS ARE MY SETTINGS PLEASE FIND YOUR OWN: "M303 E-1 C8 S60" to run autotune on the bed at 60 degreesC for 8 cycles.
+// FIND YOUR OWN: "M303 E-1 C8 S60" to run autotune on the bed at 60 degreesC for 8 cycles.
 // More info here: http://reprap.org/wiki/PID_Tuning
 
 /**
@@ -150,7 +150,7 @@
  * The pin number for the Beeper is 27
 */
 
-#define FILAMENT_RUNOUT_SENSOR     // If you need to reverse the logic of the sensor go to Line 1005
+#define FILAMENT_RUNOUT_SENSOR     // BLTOUCH and Filament Sensor will not work together in the stock CR-10 board, If one is chosen the other needs to be disabled
 
 
 /************************ END OF EASY CONFIG ***************************
@@ -286,7 +286,7 @@
 
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
-#define CUSTOM_MACHINE_NAME "CR-10S Community Firmware" // This is your printer, change as needed!
+#define CUSTOM_MACHINE_NAME "CR-10S BLTouch Community Firmware"
 
 // Define this to set a unique identifier for this printer, (Used by some programs to differentiate between machines)
 // You can use an online service to generate a random UUID. (eg http://www.uuidgenerator.net/version4)
@@ -660,7 +660,7 @@
   //#define ENDSTOPPULLUP_ZMIN_PROBE
 #endif
 
-// Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup). This settings were moved to top
+// Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
 //#define X_MIN_ENDSTOP_INVERTING false // set to true to invert the logic of the endstop.
 //#define Y_MIN_ENDSTOP_INVERTING false // set to true to invert the logic of the endstop.
 //#define Z_MIN_ENDSTOP_INVERTING false // set to true to invert the logic of the endstop.
@@ -859,7 +859,10 @@
  *      O-- FRONT --+
  *    (0,0)
  */
- 
+//#define X_PROBE_OFFSET_FROM_EXTRUDER -46  // X offset: -left  +right  [of the nozzle]
+//#define Y_PROBE_OFFSET_FROM_EXTRUDER -5  // Y offset: -front +behind [the nozzle]
+//#define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
+
 #define X_PROBE_OFFSET_FROM_EXTRUDER SENSOR_RIGHT - SENSOR_LEFT  // X offset: -left  +right  [of the nozzle]
 #define Y_PROBE_OFFSET_FROM_EXTRUDER SENSOR_BEHIND - SENSOR_FRONT // Y offset: -front +behind [the nozzle]
 #define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
@@ -899,7 +902,7 @@
 #define Z_PROBE_OFFSET_RANGE_MAX 20
 
 // Enable the M48 repeatability test to test probe accuracy
-//#define Z_MIN_PROBE_REPEATABILITY_TEST
+#define Z_MIN_PROBE_REPEATABILITY_TEST
 
 // For Inverting Stepper Enable Pins (Active Low) use 0, Non Inverting (Active High) use 1
 // :{ 0:'Low', 1:'High' }
