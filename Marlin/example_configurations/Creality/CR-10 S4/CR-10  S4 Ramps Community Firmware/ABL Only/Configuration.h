@@ -108,7 +108,7 @@
 /**
  * Margin around perimiter of bed for probing (will not probe outside this margin)
  */
-#define BED_MARGIN  10
+#define BED_MARGIN  4
 
 
 /**
@@ -379,7 +379,6 @@
 
 // @section machine
 
-
 /**
  * Select your power supply here. Use 0 if you haven't connected the PS_ON_PIN
  *
@@ -524,7 +523,7 @@
 
   // Ultimaker
   //#define  DEFAULT_Kp 22.2
-  // #define  DEFAULT_Ki 1.08
+  //#define  DEFAULT_Ki 1.08
   //#define  DEFAULT_Kd 114
 
   // MakerGear
@@ -597,7 +596,7 @@
 // This option prevents a single extrusion longer than EXTRUDE_MAXLENGTH.
 // Note that for Bowden Extruders a too-small value here may prevent loading.
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 1000
+#define EXTRUDE_MAXLENGTH 200
 
 //===========================================================================
 //======================== Thermal Runaway Protection =======================
@@ -740,15 +739,9 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-<<<<<<< HEAD:Marlin/example_configurations/Creality/CR-10 S4/CR-10  S4 Ramps Community Firmware/ABL Only/Configuration.h
-#define DEFAULT_XJERK                 20.0
-#define DEFAULT_YJERK                 20.0
-#define DEFAULT_ZJERK                  2.7
-=======
 #define DEFAULT_XJERK                 10.0
 #define DEFAULT_YJERK                 10.0
-#define DEFAULT_ZJERK                  0.3
->>>>>>> 0640bd028215a01ff9a01a46d4dcb859ba208a20:Marlin/example_configurations/Velleman/K8200/Configuration.h
+#define DEFAULT_ZJERK                  2.7
 #define DEFAULT_EJERK                  5.0
 
 //===========================================================================
@@ -874,7 +867,6 @@
 #define Y_PROBE_OFFSET_FROM_EXTRUDER SENSOR_BEHIND - SENSOR_FRONT // Y offset: -front +behind [the nozzle]
 #define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
 
-
 // X and Y axis travel speed (mm/m) between probes
 #define XY_PROBE_SPEED 10000
 
@@ -884,15 +876,10 @@
 // Speed for the "accurate" probe of each point
 #define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2)
 
-<<<<<<< HEAD:Marlin/example_configurations/Creality/CR-10 S4/CR-10  S4 Ramps Community Firmware/ABL Only/Configuration.h
-// Use double touch for probing
-#define PROBE_DOUBLE_TOUCH
-=======
 // The number of probes to perform at each point.
 //   Set to 2 for a fast/slow probe, using the second probe result.
 //   Set to 3 or more for slow probes, averaging the results.
-//#define MULTIPLE_PROBING 2
->>>>>>> 0640bd028215a01ff9a01a46d4dcb859ba208a20:Marlin/example_configurations/Velleman/K8200/Configuration.h
+#define MULTIPLE_PROBING 2
 
 /**
  * Z probes require clearance when deploying, stowing, and moving between
@@ -1001,11 +988,6 @@
 #define Y_MAX_POS Y_BED_SIZE
 #define Z_MAX_POS 400
 
-<<<<<<< HEAD:Marlin/example_configurations/Creality/CR-10 S4/CR-10  S4 Ramps Community Firmware/ABL Only/Configuration.h
-// If enabled, axes won't move below MIN_POS in response to movement commands.
-//#define MIN_SOFTWARE_ENDSTOPS
-// If enabled, axes won't move above MAX_POS in response to movement commands.
-=======
 /**
  * Software Endstops
  *
@@ -1016,7 +998,7 @@
  */
 
 // Min software endstops curtail movement below minimum coordinate bounds
-#define MIN_SOFTWARE_ENDSTOPS
+//#define MIN_SOFTWARE_ENDSTOPS
 #if ENABLED(MIN_SOFTWARE_ENDSTOPS)
   #define MIN_SOFTWARE_ENDSTOP_X
   #define MIN_SOFTWARE_ENDSTOP_Y
@@ -1024,7 +1006,6 @@
 #endif
 
 // Max software endstops curtail movement above maximum coordinate bounds
->>>>>>> 0640bd028215a01ff9a01a46d4dcb859ba208a20:Marlin/example_configurations/Velleman/K8200/Configuration.h
 #define MAX_SOFTWARE_ENDSTOPS
 #if ENABLED(MAX_SOFTWARE_ENDSTOPS)
   #define MAX_SOFTWARE_ENDSTOP_X
@@ -1040,7 +1021,7 @@
  * For other boards you may need to define FIL_RUNOUT_PIN.
  * By default the firmware assumes HIGH = has filament, LOW = ran out
  */
-//#define FILAMENT_RUNOUT_SENSOR // moved to top
+//#define FILAMENT_RUNOUT_SENSOR
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   #define FIL_RUNOUT_INVERTING true // set to true to invert the logic of the sensor.
   #define ENDSTOPPULLUP_FIL_RUNOUT // Uncomment to use internal pullup for filament runout pins if the sensor is defined.
@@ -1128,7 +1109,7 @@
   /**
    * Enable the G26 Mesh Validation Pattern tool.
    */
-  //#define G26_MESH_VALIDATION   // Enable G26 mesh validation
+  #define G26_MESH_VALIDATION   // Enable G26 mesh validation
   #if ENABLED(G26_MESH_VALIDATION)
     #define MESH_TEST_NOZZLE_SIZE     0.4   // (mm) Diameter of primary nozzle.
     #define MESH_TEST_LAYER_HEIGHT    0.2   // (mm) Default layer height for the G26 Mesh Validation Tool.
@@ -1138,7 +1119,7 @@
 
 #endif
 
-#if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR) || ENABLED(BED_MESH_LEVELING)
+#if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
 
   // Set the number of grid points per dimension.
   #define GRID_MAX_POINTS_X GRID_POINTS
@@ -1191,15 +1172,10 @@
   //========================= Unified Bed Leveling ============================
   //===========================================================================
 
-<<<<<<< HEAD:Marlin/example_configurations/Creality/CR-10 S4/CR-10  S4 Ramps Community Firmware/ABL Only/Configuration.h
-  #define UBL_MESH_INSET BED_MARGIN          // Mesh inset margin on print area
-  #define GRID_MAX_POINTS_X GRID_POINTS      // Don't use more than 15 points per axis, implementation limited.
-=======
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
   #define MESH_INSET 1              // Mesh inset margin on print area
   #define GRID_MAX_POINTS_X 10      // Don't use more than 15 points per axis, implementation limited.
->>>>>>> 0640bd028215a01ff9a01a46d4dcb859ba208a20:Marlin/example_configurations/Velleman/K8200/Configuration.h
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   #define UBL_PROBE_PT_1_X PROBE_X_LEFT // Probing points for 3-Point leveling of the mesh
@@ -1209,10 +1185,6 @@
   #define UBL_PROBE_PT_3_X PROBE_X_MIDDLE
   #define UBL_PROBE_PT_3_Y PROBE_Y_BACK
 
-<<<<<<< HEAD:Marlin/example_configurations/Creality/CR-10 S4/CR-10  S4 Ramps Community Firmware/ABL Only/Configuration.h
-  //#define UBL_G26_MESH_VALIDATION // Enable G26 mesh validation
-=======
->>>>>>> 0640bd028215a01ff9a01a46d4dcb859ba208a20:Marlin/example_configurations/Velleman/K8200/Configuration.h
   #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle
   #define UBL_SAVE_ACTIVE_ON_M500   // Save the currently active mesh in the current slot on M500
 
@@ -1363,7 +1335,7 @@
 // When enabled Marlin will send a busy status message to the host
 // every couple of seconds when it can't accept commands.
 //
-//#define HOST_KEEPALIVE_FEATURE        // Disable this if your host doesn't like keepalive messages
+#define HOST_KEEPALIVE_FEATURE        // Disable this if your host doesn't like keepalive messages
 #define DEFAULT_KEEPALIVE_INTERVAL 2  // Number of seconds between "busy" messages. Set with M113.
 #define BUSY_WHILE_HEATING            // Some hosts require "busy" messages even during heating
 
@@ -1404,7 +1376,7 @@
  *    P1  Raise the nozzle always to Z-park height.
  *    P2  Raise the nozzle by Z-park amount, limited to Z_MAX_POS.
  */
-//#define NOZZLE_PARK_FEATURE
+#define NOZZLE_PARK_FEATURE
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z }
@@ -1632,7 +1604,7 @@
 //
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
-#define INDIVIDUAL_AXIS_HOMING_MENU
+//#define INDIVIDUAL_AXIS_HOMING_MENU
 
 //
 // SPEAKER/BUZZER
@@ -1649,8 +1621,8 @@
 // Note: Test audio output with the G-Code:
 //  M300 S<frequency Hz> P<duration ms>
 //
-//#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 2
-//#define LCD_FEEDBACK_FREQUENCY_HZ 5000
+//#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 100
+//#define LCD_FEEDBACK_FREQUENCY_HZ 1000
 
 //
 // CONTROLLER TYPE: Standard
@@ -1867,13 +1839,19 @@
 //#define CR10_STOCKDISPLAY
 
 //
-// MKS OLED 1.3" 128 × 64 FULL GRAPHICS CONTROLLER
+// MKS OLED 1.3" 128x64 FULL GRAPHICS CONTROLLER
 // http://reprap.org/wiki/MKS_12864OLED
 //
 // Tiny, but very sharp OLED display
+// If there is a pixel shift, try the other controller.
 //
 //#define MKS_12864OLED          // Uses the SH1106 controller (default)
 //#define MKS_12864OLED_SSD1306  // Uses the SSD1306 controller
+
+// Silvergate GLCD controller
+// http://github.com/android444/Silvergate
+//
+//#define SILVER_GATE_GLCD_CONTROLLER
 
 //=============================================================================
 //=============================== Extra Features ==============================
@@ -1997,7 +1975,7 @@
 // Delay (in milliseconds) before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
 // If the servo can't reach the requested position, increase it.
-//#define SERVO_DELAY { 300 }
+#define SERVO_DELAY { 300 }
 
 // Servo deactivation
 //

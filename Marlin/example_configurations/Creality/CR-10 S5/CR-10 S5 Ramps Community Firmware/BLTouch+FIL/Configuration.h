@@ -23,7 +23,7 @@
  */
 //#define CHANGE_Y_DIRECTION    // If your bed homes in the wrong direction enable this (Bed should move to the back to Home)
 //#define CHANGE_X_DIRECTION    // If your X carriage homes in the wrong direction left to right, enable this (Carriage should move to the Left to Home)
-//#define CHANGE_Z_DIRECTION    // If your Z homes in the wrong direction bottom to top, enable this (Gantry should move down to Home)
+#define CHANGE_Z_DIRECTION    // If your Z homes in the wrong direction bottom to top, enable this (Gantry should move down to Home)
 /**
  *  ---------------------------------------------
  *  ---------EXTRUDER STEPS AND DIRECTION--------
@@ -32,7 +32,7 @@
  * (How to calibrate: https://toms3d.org/2014/04/06/3d-printing-guides-calibrating-your-extruder/)
  */
 #define E0_STEPS      93 // Stock value, still needs to be calibrated for your extruder stepper
-//z#define CHANGE_E0_DIRECTION   // If your extruder is going backwards, enable this
+//#define CHANGE_E0_DIRECTION   // If your extruder is going backwards, enable this
 
 /**
  *  -------------------------------------------
@@ -48,7 +48,7 @@
 #define X_MIN_ENDSTOP_INVERTING false // set to true to invert the logic of the endstop
 #define Y_MIN_ENDSTOP_INVERTING false // set to true to invert the logic of the endstop.
 #define Z_MIN_ENDSTOP_INVERTING false // set to true to invert the logic of the endstop
-#define Z_MIN_PROBE_ENDSTOP_INVERTING true // set to true to invert the logic of the probe
+#define Z_MIN_PROBE_ENDSTOP_INVERTING false // set to true to invert the logic of the probe
 
 /**
  *  -----------------------------------------
@@ -82,10 +82,10 @@
  *    
  */
 
-#define SENSOR_LEFT        46
-#define SENSOR_RIGHT       0
-#define SENSOR_FRONT       10
-#define SENSOR_BEHIND      0
+#define SENSOR_LEFT        46  // If your X offset is Negative type it here without the minus (-) Example if -46 then type 46 
+#define SENSOR_RIGHT       0   // If your X offset is Positive type it here
+#define SENSOR_FRONT       6   // If your Y offset is Negative type it here without the minus (-) Example if -6 then type 6
+#define SENSOR_BEHIND      0   // If your Y offset is Positive type it here
 
 /*
  * 
@@ -94,11 +94,11 @@
 /**
  * Bed leveling type 
  */
-//#define TRIPOINT // not fully configured yet as this is not very useful on large beds
-//#define LINEAR // not fully configured yet as this is not very useful on large beds
+//#define TRIPOINT // This is not very useful on large beds
+//#define LINEAR // This is not very useful on large beds
 #define BILINEAR // Most common type of bed leveling
-//#define UBL // Use when you know your bed is mostly flat, this uses a lot of progmem. Stock CR-10 won't be able to use this if Filament sensor is enabled
-//#define MANUAL
+//#define UBL // Use when you know your bed is mostly flat, this uses a lot of progmem
+//#define MANUAL // Not fully tested yet
 /**
  * Number of grid points to Probe in each direction
  * Minimum 3. Maximum 15 for UBL. Maximum 7 for MANUAL
@@ -108,7 +108,7 @@
 /**
  * Margin around perimiter of bed for probing (will not probe outside this margin)
  */
-#define BED_MARGIN  10
+#define BED_MARGIN  4
 
 
 /**
@@ -120,7 +120,7 @@
 #define  hot_Kp 17.29
 #define  hot_Ki 1.01
 #define  hot_Kd 73.64
-// FIND YOUR OWN: "M303 E0 C8 S200" to run autotune on the hotend at 200 degreesC for 8 cycles
+// THIS ARE MY SETTINGS PLEASE FIND YOUR OWN: "M303 E0 C8 S200" to run autotune on the hotend at 200 degreesC for 8 cycles
 // More info here: http://reprap.org/wiki/PID_Tuning
 /**
  * CR-10 Custom PID Settings - Stock Heatbed
@@ -129,7 +129,7 @@
 #define  bed_Ki 113.80
 #define  bed_Kd 757.81
 
-// FIND YOUR OWN: "M303 E-1 C8 S60" to run autotune on the bed at 60 degreesC for 8 cycles.
+// THIS ARE MY SETTINGS PLEASE FIND YOUR OWN: "M303 E-1 C8 S60" to run autotune on the bed at 60 degreesC for 8 cycles.
 // More info here: http://reprap.org/wiki/PID_Tuning
 
 /**
@@ -286,7 +286,7 @@
 
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
-#define CUSTOM_MACHINE_NAME "CR-10S BLTouch Community Firmware"
+#define CUSTOM_MACHINE_NAME "CR-10S Community Firmware" // This is your printer, change as needed!
 
 // Define this to set a unique identifier for this printer, (Used by some programs to differentiate between machines)
 // You can use an online service to generate a random UUID. (eg http://www.uuidgenerator.net/version4)
@@ -378,7 +378,6 @@
 //#define HOTEND_OFFSET_Y {0.0, 5.00}  // (in mm) for each extruder, offset of the hotend on the Y axis
 
 // @section machine
-
 
 /**
  * Select your power supply here. Use 0 if you haven't connected the PS_ON_PIN
@@ -524,7 +523,7 @@
 
   // Ultimaker
   //#define  DEFAULT_Kp 22.2
-  // #define  DEFAULT_Ki 1.08
+  //#define  DEFAULT_Ki 1.08
   //#define  DEFAULT_Kd 114
 
   // MakerGear
@@ -597,7 +596,7 @@
 // This option prevents a single extrusion longer than EXTRUDE_MAXLENGTH.
 // Note that for Bowden Extruders a too-small value here may prevent loading.
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 1000
+#define EXTRUDE_MAXLENGTH 200
 
 //===========================================================================
 //======================== Thermal Runaway Protection =======================
@@ -651,7 +650,7 @@
 //#define USE_ZMAX_PLUG
 
 // coarse Endstop Settings
-#define ENDSTOPPULLUPS // Comment this out (using // at the start of the line) to disable the endstop pullup resistors
+//#define ENDSTOPPULLUPS // Comment this out (using // at the start of the line) to disable the endstop pullup resistors
 
 #if DISABLED(ENDSTOPPULLUPS)
   // fine endstop settings: Individual pullups. will be ignored if ENDSTOPPULLUPS is defined
@@ -740,15 +739,9 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-<<<<<<< HEAD:Marlin/example_configurations/Creality/CR-10 S5/CR-10 S5 Ramps Community Firmware/BLTouch+FIL/Configuration.h
-#define DEFAULT_XJERK                 20.0
-#define DEFAULT_YJERK                 20.0
-#define DEFAULT_ZJERK                  2.7
-=======
 #define DEFAULT_XJERK                 10.0
 #define DEFAULT_YJERK                 10.0
-#define DEFAULT_ZJERK                  0.3
->>>>>>> 0640bd028215a01ff9a01a46d4dcb859ba208a20:Marlin/example_configurations/Infitary/i3-M508/Configuration.h
+#define DEFAULT_ZJERK                  2.7
 #define DEFAULT_EJERK                  5.0
 
 //===========================================================================
@@ -869,11 +862,10 @@
  *      O-- FRONT --+
  *    (0,0)
  */
-
+ 
 #define X_PROBE_OFFSET_FROM_EXTRUDER SENSOR_RIGHT - SENSOR_LEFT  // X offset: -left  +right  [of the nozzle]
 #define Y_PROBE_OFFSET_FROM_EXTRUDER SENSOR_BEHIND - SENSOR_FRONT // Y offset: -front +behind [the nozzle]
 #define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
-
 
 // X and Y axis travel speed (mm/m) between probes
 #define XY_PROBE_SPEED 10000
@@ -884,15 +876,10 @@
 // Speed for the "accurate" probe of each point
 #define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2)
 
-<<<<<<< HEAD:Marlin/example_configurations/Creality/CR-10 S5/CR-10 S5 Ramps Community Firmware/BLTouch+FIL/Configuration.h
-// Use double touch for probing
-#define PROBE_DOUBLE_TOUCH
-=======
 // The number of probes to perform at each point.
 //   Set to 2 for a fast/slow probe, using the second probe result.
 //   Set to 3 or more for slow probes, averaging the results.
-//#define MULTIPLE_PROBING 2
->>>>>>> 0640bd028215a01ff9a01a46d4dcb859ba208a20:Marlin/example_configurations/Infitary/i3-M508/Configuration.h
+#define MULTIPLE_PROBING 2
 
 /**
  * Z probes require clearance when deploying, stowing, and moving between
@@ -916,7 +903,7 @@
 #define Z_PROBE_OFFSET_RANGE_MAX 20
 
 // Enable the M48 repeatability test to test probe accuracy
-//#define Z_MIN_PROBE_REPEATABILITY_TEST
+#define Z_MIN_PROBE_REPEATABILITY_TEST
 
 // For Inverting Stepper Enable Pins (Active Low) use 0, Non Inverting (Active High) use 1
 // :{ 0:'Low', 1:'High' }
@@ -1001,11 +988,6 @@
 #define Y_MAX_POS Y_BED_SIZE
 #define Z_MAX_POS 500
 
-<<<<<<< HEAD:Marlin/example_configurations/Creality/CR-10 S5/CR-10 S5 Ramps Community Firmware/BLTouch+FIL/Configuration.h
-// If enabled, axes won't move below MIN_POS in response to movement commands.
-//#define MIN_SOFTWARE_ENDSTOPS
-// If enabled, axes won't move above MAX_POS in response to movement commands.
-=======
 /**
  * Software Endstops
  *
@@ -1016,7 +998,7 @@
  */
 
 // Min software endstops curtail movement below minimum coordinate bounds
-#define MIN_SOFTWARE_ENDSTOPS
+//#define MIN_SOFTWARE_ENDSTOPS
 #if ENABLED(MIN_SOFTWARE_ENDSTOPS)
   #define MIN_SOFTWARE_ENDSTOP_X
   #define MIN_SOFTWARE_ENDSTOP_Y
@@ -1024,7 +1006,6 @@
 #endif
 
 // Max software endstops curtail movement above maximum coordinate bounds
->>>>>>> 0640bd028215a01ff9a01a46d4dcb859ba208a20:Marlin/example_configurations/Infitary/i3-M508/Configuration.h
 #define MAX_SOFTWARE_ENDSTOPS
 #if ENABLED(MAX_SOFTWARE_ENDSTOPS)
   #define MAX_SOFTWARE_ENDSTOP_X
@@ -1040,7 +1021,7 @@
  * For other boards you may need to define FIL_RUNOUT_PIN.
  * By default the firmware assumes HIGH = has filament, LOW = ran out
  */
-//#define FILAMENT_RUNOUT_SENSOR // moved to top
+//#define FILAMENT_RUNOUT_SENSOR
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   #define FIL_RUNOUT_INVERTING true // set to true to invert the logic of the sensor.
   #define ENDSTOPPULLUP_FIL_RUNOUT // Uncomment to use internal pullup for filament runout pins if the sensor is defined.
@@ -1128,7 +1109,7 @@
   /**
    * Enable the G26 Mesh Validation Pattern tool.
    */
-  //#define G26_MESH_VALIDATION   // Enable G26 mesh validation
+  #define G26_MESH_VALIDATION   // Enable G26 mesh validation
   #if ENABLED(G26_MESH_VALIDATION)
     #define MESH_TEST_NOZZLE_SIZE     0.4   // (mm) Diameter of primary nozzle.
     #define MESH_TEST_LAYER_HEIGHT    0.2   // (mm) Default layer height for the G26 Mesh Validation Tool.
@@ -1138,7 +1119,7 @@
 
 #endif
 
-#if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR) || ENABLED(BED_MESH_LEVELING)
+#if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
 
   // Set the number of grid points per dimension.
   #define GRID_MAX_POINTS_X GRID_POINTS
@@ -1191,15 +1172,10 @@
   //========================= Unified Bed Leveling ============================
   //===========================================================================
 
-<<<<<<< HEAD:Marlin/example_configurations/Creality/CR-10 S5/CR-10 S5 Ramps Community Firmware/BLTouch+FIL/Configuration.h
-  #define UBL_MESH_INSET BED_MARGIN          // Mesh inset margin on print area
-  #define GRID_MAX_POINTS_X GRID_POINTS      // Don't use more than 15 points per axis, implementation limited.
-=======
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
   #define MESH_INSET 1              // Mesh inset margin on print area
   #define GRID_MAX_POINTS_X 10      // Don't use more than 15 points per axis, implementation limited.
->>>>>>> 0640bd028215a01ff9a01a46d4dcb859ba208a20:Marlin/example_configurations/Infitary/i3-M508/Configuration.h
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   #define UBL_PROBE_PT_1_X PROBE_X_LEFT // Probing points for 3-Point leveling of the mesh
@@ -1209,10 +1185,6 @@
   #define UBL_PROBE_PT_3_X PROBE_X_MIDDLE
   #define UBL_PROBE_PT_3_Y PROBE_Y_BACK
 
-<<<<<<< HEAD:Marlin/example_configurations/Creality/CR-10 S5/CR-10 S5 Ramps Community Firmware/BLTouch+FIL/Configuration.h
-  //#define UBL_G26_MESH_VALIDATION // Enable G26 mesh validation
-=======
->>>>>>> 0640bd028215a01ff9a01a46d4dcb859ba208a20:Marlin/example_configurations/Infitary/i3-M508/Configuration.h
   #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle
   #define UBL_SAVE_ACTIVE_ON_M500   // Save the currently active mesh in the current slot on M500
 
@@ -1363,7 +1335,7 @@
 // When enabled Marlin will send a busy status message to the host
 // every couple of seconds when it can't accept commands.
 //
-//#define HOST_KEEPALIVE_FEATURE        // Disable this if your host doesn't like keepalive messages
+#define HOST_KEEPALIVE_FEATURE        // Disable this if your host doesn't like keepalive messages
 #define DEFAULT_KEEPALIVE_INTERVAL 2  // Number of seconds between "busy" messages. Set with M113.
 #define BUSY_WHILE_HEATING            // Some hosts require "busy" messages even during heating
 
@@ -1404,7 +1376,7 @@
  *    P1  Raise the nozzle always to Z-park height.
  *    P2  Raise the nozzle by Z-park amount, limited to Z_MAX_POS.
  */
-//#define NOZZLE_PARK_FEATURE
+#define NOZZLE_PARK_FEATURE
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z }
@@ -1632,7 +1604,7 @@
 //
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
-#define INDIVIDUAL_AXIS_HOMING_MENU
+//#define INDIVIDUAL_AXIS_HOMING_MENU
 
 //
 // SPEAKER/BUZZER
@@ -1649,8 +1621,8 @@
 // Note: Test audio output with the G-Code:
 //  M300 S<frequency Hz> P<duration ms>
 //
-//#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 2
-//#define LCD_FEEDBACK_FREQUENCY_HZ 5000
+//#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 100
+//#define LCD_FEEDBACK_FREQUENCY_HZ 1000
 
 //
 // CONTROLLER TYPE: Standard
@@ -1867,10 +1839,11 @@
 //#define CR10_STOCKDISPLAY
 
 //
-// MKS OLED 1.3" 128 × 64 FULL GRAPHICS CONTROLLER
+// MKS OLED 1.3" 128x64 FULL GRAPHICS CONTROLLER
 // http://reprap.org/wiki/MKS_12864OLED
 //
 // Tiny, but very sharp OLED display
+// If there is a pixel shift, try the other controller.
 //
 //#define MKS_12864OLED          // Uses the SH1106 controller (default)
 //#define MKS_12864OLED_SSD1306  // Uses the SSD1306 controller
@@ -2002,7 +1975,7 @@
 // Delay (in milliseconds) before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
 // If the servo can't reach the requested position, increase it.
-//#define SERVO_DELAY { 300 }
+#define SERVO_DELAY { 300 }
 
 // Servo deactivation
 //
