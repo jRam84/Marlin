@@ -81,7 +81,7 @@
  *    (0,0)
  *    
  */
- 
+
 #define SENSOR_LEFT        46  // If your X offset is Negative type it here without the minus (-) Example if -46 then type 46 
 #define SENSOR_RIGHT       0   // If your X offset is Positive type it here
 #define SENSOR_FRONT       6   // If your Y offset is Negative type it here without the minus (-) Example if -6 then type 6
@@ -103,7 +103,7 @@
  * Number of grid points to Probe in each direction
  * Minimum 3. Maximum 15 for UBL. Maximum 7 for MANUAL
  */
-#define GRID_POINTS        4
+#define GRID_POINTS        5
 
 /**
  * Margin around perimiter of bed for probing (will not probe outside this margin)
@@ -150,7 +150,7 @@
  * The pin number for the Beeper is 27
 */
 
-#define FILAMENT_RUNOUT_SENSOR     // BLTOUCH and Filament Sensor will not work together in the stock CR-10 board, If one is chosen the other needs to be disabled
+//#define FILAMENT_RUNOUT_SENSOR     // BLTOUCH and Filament Sensor will not work together in the stock CR-10 board, If one is chosen the other needs to be disabled
 
 
 /************************ END OF EASY CONFIG ***************************
@@ -238,8 +238,8 @@
 // build by the user have been successfully uploaded into firmware.
 //#define STRING_CONFIG_H_AUTHOR "(J Ram)" // Who made the changes.
 //#define SHOW_BOOTSCREEN
-#define STRING_SPLASH_LINE1 SHORT_BUILD_VERSION // will be shown during bootup in line 1
-#define STRING_SPLASH_LINE2 WEBSITE_URL         // will be shown during bootup in line 2
+//#define STRING_SPLASH_LINE1 SHORT_BUILD_VERSION // will be shown during bootup in line 1
+//#define STRING_SPLASH_LINE2 WEBSITE_URL         // will be shown during bootup in line 2
 
 //
 // *** VENDORS PLEASE READ *****************************************************
@@ -299,7 +299,7 @@
 #define EXTRUDERS 1
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
-#define DEFAULT_NOMINAL_FILAMENT_DIA 3.0
+#define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
 //#define SINGLENOZZLE
@@ -613,7 +613,7 @@
 // This option prevents a single extrusion longer than EXTRUDE_MAXLENGTH.
 // Note that for Bowden Extruders a too-small value here may prevent loading.
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 1000
+#define EXTRUDE_MAXLENGTH 200
 
 //===========================================================================
 //======================== Thermal Runaway Protection =======================
@@ -756,17 +756,9 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-<<<<<<< HEAD:Marlin/example_configurations/Creality/CR-10 S4/CR-10  S4 Melzi Community Firmware/S4 Melzi ABL+FIL/Configuration.h
-#define DEFAULT_XJERK                 20.0
-#define DEFAULT_YJERK                 20.0
-#define DEFAULT_ZJERK                  2.7
-=======
-// ANET A6 Firmware V2.0 defaults (jerk):
-// Vxy-jerk: 10, Vz-jerk: +000.30, Ve-jerk: 5
 #define DEFAULT_XJERK                 10.0
 #define DEFAULT_YJERK                 10.0
-#define DEFAULT_ZJERK                  0.3
->>>>>>> 0640bd028215a01ff9a01a46d4dcb859ba208a20:Marlin/example_configurations/Anet/A6/Configuration.h
+#define DEFAULT_ZJERK                  2.7
 #define DEFAULT_EJERK                  5.0
 
 //===========================================================================
@@ -895,7 +887,6 @@
 #define Y_PROBE_OFFSET_FROM_EXTRUDER SENSOR_BEHIND - SENSOR_FRONT // Y offset: -front +behind [the nozzle]
 #define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
 
-
 // X and Y axis travel speed (mm/m) between probes
 #define XY_PROBE_SPEED 10000
 
@@ -947,7 +938,7 @@
 #define DISABLE_Y false
 #define DISABLE_Z false
 // Warn on display about possibly reduced accuracy
-#define DISABLE_REDUCED_ACCURACY_WARNING
+//#define DISABLE_REDUCED_ACCURACY_WARNING
 
 // @section extruder
 
@@ -1005,12 +996,6 @@
 #define Y_MAX_POS Y_BED_SIZE
 #define Z_MAX_POS 400
 
-<<<<<<< HEAD:Marlin/example_configurations/Creality/CR-10 S4/CR-10  S4 Melzi Community Firmware/S4 Melzi ABL+FIL/Configuration.h
-// If enabled, axes won't move below MIN_POS in response to movement commands.
-//#define MIN_SOFTWARE_ENDSTOPS
-// If enabled, axes won't move above MAX_POS in response to movement commands.
-//#define MAX_SOFTWARE_ENDSTOPS
-=======
 /**
  * Software Endstops
  *
@@ -1021,7 +1006,7 @@
  */
 
 // Min software endstops curtail movement below minimum coordinate bounds
-#define MIN_SOFTWARE_ENDSTOPS
+//#define MIN_SOFTWARE_ENDSTOPS
 #if ENABLED(MIN_SOFTWARE_ENDSTOPS)
   #define MIN_SOFTWARE_ENDSTOP_X
   #define MIN_SOFTWARE_ENDSTOP_Y
@@ -1029,13 +1014,12 @@
 #endif
 
 // Max software endstops curtail movement above maximum coordinate bounds
-#define MAX_SOFTWARE_ENDSTOPS
+//#define MAX_SOFTWARE_ENDSTOPS
 #if ENABLED(MAX_SOFTWARE_ENDSTOPS)
   #define MAX_SOFTWARE_ENDSTOP_X
   #define MAX_SOFTWARE_ENDSTOP_Y
   #define MAX_SOFTWARE_ENDSTOP_Z
 #endif
->>>>>>> 0640bd028215a01ff9a01a46d4dcb859ba208a20:Marlin/example_configurations/Anet/A6/Configuration.h
 
 /**
  * Filament Runout Sensor
@@ -1165,7 +1149,7 @@
 
     // Beyond the probed grid, continue the implied tilt?
     // Default is to maintain the height of the nearest edge.
-    #define EXTRAPOLATE_BEYOND_GRID
+    //#define EXTRAPOLATE_BEYOND_GRID
 
     //
     // Experimental Subdivision of the grid by Catmull-Rom method.
@@ -1196,15 +1180,10 @@
   //========================= Unified Bed Leveling ============================
   //===========================================================================
 
-<<<<<<< HEAD:Marlin/example_configurations/Creality/CR-10 S4/CR-10  S4 Melzi Community Firmware/S4 Melzi ABL+FIL/Configuration.h
-  #define UBL_MESH_INSET BED_MARGIN          // Mesh inset margin on print area
-  #define GRID_MAX_POINTS_X GRID_POINTS      // Don't use more than 15 points per axis, implementation limited.
-=======
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
   #define MESH_INSET 1              // Mesh inset margin on print area
   #define GRID_MAX_POINTS_X 10      // Don't use more than 15 points per axis, implementation limited.
->>>>>>> 0640bd028215a01ff9a01a46d4dcb859ba208a20:Marlin/example_configurations/Anet/A6/Configuration.h
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   #define UBL_PROBE_PT_1_X PROBE_X_LEFT // Probing points for 3-Point leveling of the mesh
@@ -1214,10 +1193,6 @@
   #define UBL_PROBE_PT_3_X PROBE_X_MIDDLE
   #define UBL_PROBE_PT_3_Y PROBE_Y_BACK
 
-<<<<<<< HEAD:Marlin/example_configurations/Creality/CR-10 S4/CR-10  S4 Melzi Community Firmware/S4 Melzi ABL+FIL/Configuration.h
-  //#define UBL_G26_MESH_VALIDATION // Enable G26 mesh validation
-=======
->>>>>>> 0640bd028215a01ff9a01a46d4dcb859ba208a20:Marlin/example_configurations/Anet/A6/Configuration.h
   #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle
   #define UBL_SAVE_ACTIVE_ON_M500   // Save the currently active mesh in the current slot on M500
 
@@ -1279,22 +1254,8 @@
 #define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
-<<<<<<< HEAD:Marlin/example_configurations/Creality/CR-10 S4/CR-10  S4 Melzi Community Firmware/S4 Melzi ABL+FIL/Configuration.h
-  #define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE) / 2)    // X point for Z homing when homing all axis (G28).
-  #define Z_SAFE_HOMING_Y_POINT ((Y_BED_SIZE) / 2)    // Y point for Z homing when homing all axis (G28).
-=======
   #define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE) / 2)    // X point for Z homing when homing all axes (G28).
   #define Z_SAFE_HOMING_Y_POINT ((Y_BED_SIZE) / 2)    // Y point for Z homing when homing all axes (G28).
-
-  //Anet A6 with new X-Axis
-  //#define Z_SAFE_HOMING_X_POINT 113    // X point for Z homing when homing all axes (G28).
-  //#define Z_SAFE_HOMING_Y_POINT 112    // Y point for Z homing when homing all axes (G28).
-
-  //Anet A6 with new X-Axis and defined X_HOME_POS -7, Y_HOME_POS -6
-  //#define Z_SAFE_HOMING_X_POINT 107    // X point for Z homing when homing all axes (G28).
-  //#define Z_SAFE_HOMING_Y_POINT 107    // Y point for Z homing when homing all axes (G28).
-
->>>>>>> 0640bd028215a01ff9a01a46d4dcb859ba208a20:Marlin/example_configurations/Anet/A6/Configuration.h
 #endif
 
 // Homing speeds (mm/m)
@@ -1423,7 +1384,7 @@
  *    P1  Raise the nozzle always to Z-park height.
  *    P2  Raise the nozzle by Z-park amount, limited to Z_MAX_POS.
  */
-//#define NOZZLE_PARK_FEATURE
+#define NOZZLE_PARK_FEATURE
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z }
@@ -1668,8 +1629,8 @@
 // Note: Test audio output with the G-Code:
 //  M300 S<frequency Hz> P<duration ms>
 //
-//#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 2
-//#define LCD_FEEDBACK_FREQUENCY_HZ 5000
+//#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 100
+//#define LCD_FEEDBACK_FREQUENCY_HZ 1000
 
 //
 // CONTROLLER TYPE: Standard
@@ -1782,13 +1743,9 @@
 //#define ZONESTAR_LCD            // Requires ADC_KEYPAD_PIN to be assigned to an analog pin.
                                   // This LCD is known to be susceptible to electrical interference
                                   // which scrambles the display.  Pressing any button clears it up.
-<<<<<<< HEAD:Marlin/example_configurations/Creality/CR-10 S4/CR-10  S4 Melzi Community Firmware/S4 Melzi ABL+FIL/Configuration.h
-//#define ANET_FULL_GRAPHICS_LCD  // Anet 128x64 full graphics lcd with rotary encoder as used on Anet A6
-=======
                                   // This is a LCD2004 display with 5 analog buttons.
 
-#define ANET_FULL_GRAPHICS_LCD    // Anet 128x64 full graphics lcd with rotary encoder as used on Anet A6
->>>>>>> 0640bd028215a01ff9a01a46d4dcb859ba208a20:Marlin/example_configurations/Anet/A6/Configuration.h
+//#define ANET_FULL_GRAPHICS_LCD  // Anet 128x64 full graphics lcd with rotary encoder as used on Anet A6
                                   // A clone of the RepRapDiscount full graphics display but with
                                   // different pins/wiring (see pins_ANET_10.h).
 
@@ -1890,10 +1847,11 @@
 //#define CR10_STOCKDISPLAY
 
 //
-// MKS OLED 1.3" 128 × 64 FULL GRAPHICS CONTROLLER
+// MKS OLED 1.3" 128x64 FULL GRAPHICS CONTROLLER
 // http://reprap.org/wiki/MKS_12864OLED
 //
 // Tiny, but very sharp OLED display
+// If there is a pixel shift, try the other controller.
 //
 //#define MKS_12864OLED          // Uses the SH1106 controller (default)
 //#define MKS_12864OLED_SSD1306  // Uses the SSD1306 controller
@@ -1983,11 +1941,11 @@
 #endif
 
 // Support for Adafruit Neopixel LED driver
-//#define NEOPIXEL_LED
+#define NEOPIXEL_LED
 #if ENABLED(NEOPIXEL_LED)
-  #define NEOPIXEL_TYPE   NEO_GRBW // NEO_GRBW / NEO_GRB - four/three channel driver type (defined in Adafruit_NeoPixel.h)
-  #define NEOPIXEL_PIN    4        // LED driving pin on motherboard 4 => D4 (EXP2-5 on Printrboard) / 30 => PC7 (EXP3-13 on Rumba)
-  #define NEOPIXEL_PIXELS 30       // Number of LEDs in the strip
+  #define NEOPIXEL_TYPE   NEO_GRB // NEO_GRBW / NEO_GRB - four/three channel driver type (defined in Adafruit_NeoPixel.h)
+  #define NEOPIXEL_PIN    27        // LED driving pin on motherboard 4 => D4 (EXP2-5 on Printrboard) / 30 => PC7 (EXP3-13 on Rumba)
+  #define NEOPIXEL_PIXELS 41       // Number of LEDs in the strip
   #define NEOPIXEL_IS_SEQUENTIAL   // Sequential display for temperature change - LED by LED. Disable to change all LEDs at once.
   #define NEOPIXEL_BRIGHTNESS 127  // Initial brightness (0-255)
   //#define NEOPIXEL_STARTUP_TEST  // Cycle through colors at startup
@@ -2025,7 +1983,7 @@
 // Delay (in milliseconds) before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
 // If the servo can't reach the requested position, increase it.
-//#define SERVO_DELAY { 300 }
+#define SERVO_DELAY { 300 }
 
 // Servo deactivation
 //
